@@ -3,6 +3,8 @@
 import ContactForm from "./contactForm/contactForm"
 import ContactList from "./contactList/contactList"
 import SearchBox from "./searchBox/searchBox"
+import { useState } from "react"
+
 
 
 
@@ -14,13 +16,16 @@ const contacts = [
   {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
 ]
 
+  const [filter, setFilter] = useState('')
+  
+  const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
 
   return (
     <div>
       <h1>Phonebook</h1>
       <ContactForm />
-      <SearchBox />
-      <ContactList contacts={contacts} />
+      <SearchBox filter={filter} setFilter={setFilter } />
+      <ContactList contacts={filteredContacts} />
     </div>
   )
 }
